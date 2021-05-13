@@ -1,6 +1,7 @@
 package net.sernoxcraft.schottersystem.commands;
 
 import net.sernoxcraft.schottersystem.main.Main;
+import net.sernoxcraft.schottersystem.utils.SchotterManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,47 +17,49 @@ public class PayCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // /pay <user> <geld>
-        if (sender instanceof Player){
+        if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (args.length == 1){
+            if (args.length == 1) {
                 Player target = Bukkit.getPlayer(args[0]);
-                    //Spieler der das Geld bekommen soll.
+                //Spieler der das Geld bekommen soll.
                 if (target == null) {
                     p.sendMessage(Main.prefix + "§cDer Spieler ist nicht online!");
                     return false;
                 }
-                int sum = 5;
-                try{
-                    if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/") ){
+                Long sum = Long.valueOf(5);
+                try {
+                    if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
                         p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                         return false;
                     }
-                    sum = Integer.parseInt(args[1]);
-                }catch (Exception e){
+                    sum = Long.valueOf(args[1]);
+                } catch (Exception e) {
                     p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                 }
 
                 //MySQL part
                 //Sender
-                int balancePlayerSender = 1000;
+                Long balancePlayerSender = SchotterManager.getBalance(p);
                 //Target
-                int balancePlayerTarget = 1000;
+                Long balancePlayerTarget = SchotterManager.getBalance(target);
 
                 //Nicht Anfassen
-                int sumPlayerSender = 0;
-                int sumPlayerTarget = 0;
+                Long sumPlayerSender = Long.valueOf(0);
+                Long sumPlayerTarget = Long.valueOf(0);
 
-                if (balancePlayerSender < sum){
+                if (balancePlayerSender < sum) {
                     //EndGeld Player
-                     sumPlayerSender = balancePlayerSender - sum;
+                    sumPlayerSender = balancePlayerSender - sum;
                     //EndGeld Target
-                     sumPlayerTarget = balancePlayerTarget + sum;
+                    sumPlayerTarget = balancePlayerTarget + sum;
 
-                     //Set New MySQL Values
+                    //Set New MySQL Values
 
+                    SchotterManager.update(p, sumPlayerSender);
+                    SchotterManager.update(target, sumPlayerTarget);
 
-                     p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 überwiesen.");
-                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
+                    p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 überwiesen.");
+                    target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
 
 
                 } else {
