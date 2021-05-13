@@ -1,5 +1,8 @@
 package net.sernoxcraft.schottersystem.main;
 
+import net.sernoxcraft.schottersystem.commands.BalanceCommand;
+import net.sernoxcraft.schottersystem.commands.PayCommand;
+import net.sernoxcraft.schottersystem.listeners.Join;
 import net.sernoxcraft.schottersystem.utils.Config;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +15,7 @@ import java.io.IOException;
 public class Main extends JavaPlugin {
 
     public static String prefix = "";
+    public static Long startBalance = Long.valueOf(0);
 
     public static Main plugin;
     public static Main getPlugin() {
@@ -23,6 +27,14 @@ public class Main extends JavaPlugin {
 
         loadConfigFirst();
         prefix = Config.config.getString("Prefix");
+        startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
+
+        getServer().getPluginManager().registerEvents(new Join(), this);
+        getCommand("pay").setExecutor(new PayCommand());
+        getCommand("balance").setExecutor(new BalanceCommand());
+
+
+
         super.onEnable();
     }
 
@@ -37,6 +49,8 @@ public class Main extends JavaPlugin {
     public void loadConfigFirst(){
         if (!Config.configFile.exists()){
             Config.config.set("Prefix", "§b§lSernox§a§lCraft §8➛§r ");
+            Config.config.set("StartBalance", 1000);
+
             try {
                 Config.save();
             } catch (IOException e) {
