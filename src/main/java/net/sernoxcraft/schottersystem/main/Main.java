@@ -3,6 +3,7 @@ package net.sernoxcraft.schottersystem.main;
 import net.sernoxcraft.schottersystem.commands.BalanceCommand;
 import net.sernoxcraft.schottersystem.commands.PayCommand;
 import net.sernoxcraft.schottersystem.listeners.Join;
+import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
 import net.sernoxcraft.schottersystem.utils.Config;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,7 +26,11 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+
         loadConfigFirst();
+
+        SystemManager.startUp();
+
         prefix = Config.config.getString("Prefix");
         startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
 
