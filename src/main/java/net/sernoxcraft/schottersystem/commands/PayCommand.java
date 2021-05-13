@@ -74,14 +74,6 @@ public class PayCommand implements CommandExecutor {
                     p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 Schotter überwiesen.");
                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
 
-                    WebhookClient webhookClient = WebhookClient.withUrl("https://discord.com/api/webhooks/842517599815335936/X4fKlY09vSLvtGq44ucn9vesF833gKHQoqzeEgU6O-_LVY8ERSCT51hbZAehdQC1paSB");
-                    WebhookEmbedBuilder builder = new WebhookEmbedBuilder().setAuthor(new WebhookEmbed.EmbedAuthor("Schotter-Manager", null, null));
-                    builder.setTitle(new WebhookEmbed.EmbedTitle("Shotter-Manager", null));
-                    builder.setDescription("Der Spieler " + p.getName() + " (" + p.getUniqueId().toString() + ") hat den Spieler " + target.getName() + " (" + target.getUniqueId().toString() + ") " + sum + " Schotter überwiesen");
-                    builder.setFooter(new WebhookEmbed.EmbedFooter("Created by LvckyWorld", null));
-                    webhookClient.send(builder.build());
-                    webhookClient.close();
-
 
                 } else {
                     p.sendMessage(Main.prefix + "§cSo viel Geld hast du nicht!");
