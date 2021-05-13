@@ -23,6 +23,7 @@ public class PayCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (p.getUniqueId() == target.getUniqueId()){
                     p.sendMessage(Main.prefix + "§cDu kannst dir selber kein Geld geben!");
+                    return false;
                 }
                 //Spieler der das Geld bekommen soll.
                 if (target == null) {
@@ -38,6 +39,11 @@ public class PayCommand implements CommandExecutor {
                     sum = Long.valueOf(args[1]);
                 } catch (Exception e) {
                     p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                }
+
+                if (sum == 0){
+                    p.sendMessage(Main.prefix + "§cDu musst mindestens 1 Schotter überweisen!");
+                    return false;
                 }
 
                 //MySQL part
