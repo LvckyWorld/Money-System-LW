@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
  * Licensed to Iven Schlenther & Lukas Oetken
  **/
 public class PayCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // /pay <user> <geld>
@@ -24,8 +25,12 @@ public class PayCommand implements CommandExecutor {
                     p.sendMessage(Main.prefix + "§cDer Spieler ist nicht online!");
                     return false;
                 }
-                int sum = 1;
+                int sum = 5;
                 try{
+                    if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/") ){
+                        p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                        return false;
+                    }
                     sum = Integer.parseInt(args[1]);
                 }catch (Exception e){
                     p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
@@ -33,21 +38,31 @@ public class PayCommand implements CommandExecutor {
 
                 //MySQL part
                 //Sender
-                int balancePlayerSender = 2;
+                int balancePlayerSender = 1000;
                 //Target
-                int balancePlayerTarget;
+                int balancePlayerTarget = 1000;
 
-                if (balancePlayerSender > sum){
+                //Nicht Anfassen
+                int sumPlayerSender = 0;
+                int sumPlayerTarget = 0;
+
+                if (balancePlayerSender < sum){
+                    //EndGeld Player
+                     sumPlayerSender = balancePlayerSender - sum
+                    //EndGeld Target
+                     sumPlayerTarget = balancePlayerTarget + sum;
+
+                     //Set New MySQL Values
 
 
+                     p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 überwiesen.");
+                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
 
 
                 } else {
                     p.sendMessage(Main.prefix + "§cSo viel Geld hast du nicht!");
                     return false;
                 }
-
-
 
             } else {
                 p.sendMessage(Main.prefix + "§cFalsche Usage. Benutze bitte§7: §b/pay <user> <summe>");
