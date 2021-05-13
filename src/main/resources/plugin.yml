@@ -5,7 +5,6 @@ author: Iven S. Lukas Oe.
 commands:
   pay:
     description: Pay People for BlowJobs
-    aliases: p
   balance:
     description: Shows your Balance
     aliases: b

@@ -19,8 +19,11 @@ public class PayCommand implements CommandExecutor {
         // /pay <user> <geld>
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            if (args.length == 1) {
+            if (args.length == 2) {
                 Player target = Bukkit.getPlayer(args[0]);
+                if (p.getUniqueId() == target.getUniqueId()){
+                    p.sendMessage(Main.prefix + "§cDu kannst dir selber kein Geld geben!");
+                }
                 //Spieler der das Geld bekommen soll.
                 if (target == null) {
                     p.sendMessage(Main.prefix + "§cDer Spieler ist nicht online!");
@@ -47,7 +50,7 @@ public class PayCommand implements CommandExecutor {
                 Long sumPlayerSender = Long.valueOf(0);
                 Long sumPlayerTarget = Long.valueOf(0);
 
-                if (balancePlayerSender < sum) {
+                if (balancePlayerSender > sum) {
                     //EndGeld Player
                     sumPlayerSender = balancePlayerSender - sum;
                     //EndGeld Target

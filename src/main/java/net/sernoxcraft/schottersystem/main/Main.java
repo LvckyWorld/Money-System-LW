@@ -43,9 +43,6 @@ public class Main extends JavaPlugin {
         super.onDisable();
     }
 
-
-
-
     public void loadConfigFirst(){
         if (!Config.configFile.exists()){
             Config.config.set("Prefix", "§b§lSernox§a§lCraft §8➛§r ");
