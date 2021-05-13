@@ -67,7 +67,7 @@ public class PayCommand implements CommandExecutor {
                     SchotterManager.update(p, sumPlayerSender);
                     SchotterManager.update(target, sumPlayerTarget);
 
-                    p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 überwiesen.");
+                    p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 Schotter überwiesen.");
                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
 
 
