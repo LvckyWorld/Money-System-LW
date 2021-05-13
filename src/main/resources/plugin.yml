@@ -1,0 +1,11 @@
+name: SchotterSystem
+main: net.sernoxcraft.schottersystem.main.Main
+version: 1.0
+author: Iven S. Lukas Oe.
+commands:
+  pay:
+    description: Pay People for BlowJobs
+    aliases: p
+  balance:
+    description: Shows your Balance
+    aliases: b
