@@ -1,16 +1,20 @@
 package net.sernoxcraft.schottersystem.commands;
 
-import club.minnced.discord.webhook.WebhookClient;
-import club.minnced.discord.webhook.send.WebhookEmbed;
-import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import net.sernoxcraft.schottersystem.main.Main;
 import net.sernoxcraft.schottersystem.utils.SchotterManager;
+import net.sernoxcraft.schottersystem.utils.WebHookManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import sun.net.www.http.HttpClient;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -73,6 +77,11 @@ public class PayCommand implements CommandExecutor {
 
                     p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 Schotter überwiesen.");
                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
+
+                    try {
+                        WebHookManager.onSendDiscordMessage("Der Spieler **" + p.getName() + "** (" + p.getUniqueId().toString() + ") hat den Spieler **" + target.getName() + "** (" + target.getUniqueId().toString() + ") **" + sum + "** Schotter gegeben", "Schotter-Manager", "");
+                    } catch (Exception exception) {
+                    }
 
 
                 } else {
