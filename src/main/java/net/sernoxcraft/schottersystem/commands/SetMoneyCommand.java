@@ -20,6 +20,7 @@ public class SetMoneyCommand implements CommandExecutor {
         if (!(sender instanceof Player)) {
             if (args.length == 3) {
                 Player t = Bukkit.getPlayer(args[0]);
+                // huan
             }
         }
 
