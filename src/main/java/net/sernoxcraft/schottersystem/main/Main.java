@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Main extends JavaPlugin {
 
     public static String prefix = "";
+    public static String webHookURL = "";
     public static Long startBalance = Long.valueOf(0);
 
     public static Main plugin;
@@ -34,6 +35,7 @@ public class Main extends JavaPlugin {
         SystemManager.startUp();
 
         prefix = Config.config.getString("Prefix");
+        webHookURL = Config.config.getString("DiscordWebHookURL");
         startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
 
         getServer().getPluginManager().registerEvents(new Join(), this);
@@ -55,6 +57,7 @@ public class Main extends JavaPlugin {
         if (!Config.configFile.exists()){
             Config.config.set("Prefix", "§b§lSernox§a§lCraft §8➛§r ");
             Config.config.set("StartBalance", 1000);
+            Config.config.set("DiscordWebHookURL", "https://discord.com/api/webhooks/842700756351713281/lXJnGkNk020v4SQyVBZA0VvyBiN-KMW-V17WiCKXkECWO5TlYTjcshWtiNpL9weZC7zz");
 
             try {
                 Config.save();

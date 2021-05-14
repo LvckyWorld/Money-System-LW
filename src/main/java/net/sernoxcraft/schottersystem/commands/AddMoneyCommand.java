@@ -7,6 +7,7 @@ package net.sernoxcraft.schottersystem.commands;
 
 import net.sernoxcraft.schottersystem.main.Main;
 import net.sernoxcraft.schottersystem.utils.SchotterManager;
+import net.sernoxcraft.schottersystem.utils.WebHookManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,14 +49,29 @@ public class AddMoneyCommand implements CommandExecutor {
                         Long newBallance = calculate;
 
                         SchotterManager.update(t, newBallance);
-                        p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + newBallance + "§3 hinzugefügt");
+                        p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 hinzugefügt");
+                        t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 Schotter bekommen.");
+
+                        try {
+                            WebHookManager.onSendDiscordMessage("AddMoney","**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+
+
                     } else {
                         if (isOfflineUserExist(args[0])) {
                             Long ballanceNow = SchotterManager.getOfflinePlayerBalance(args[0]);
                             Long calculate = ballanceNow + amount;
                             Long newBallance = calculate;
                             SchotterManager.updateOffline(args[0], newBallance);
-                            p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + newBallance + "§3 hinzugefügt");
+                            p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+
+                            try {
+                                WebHookManager.onSendDiscordMessage("AddMoney","**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
                         }
                     }
                 } else {
@@ -88,14 +104,26 @@ public class AddMoneyCommand implements CommandExecutor {
                     Long newBallance = calculate;
 
                     SchotterManager.update(t, newBallance);
-                    sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + newBallance + "§3 hinzugefügt");
+                    sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+                    t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 Schotter bekommen.");
+                    try {
+                        WebHookManager.onSendDiscordMessage("AddMoney","**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", "CONSOLE"+ " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                 } else {
                     if (isOfflineUserExist(args[0])) {
                         Long ballanceNow = SchotterManager.getOfflinePlayerBalance(args[0]);
                         Long calculate = ballanceNow + amount;
                         Long newBallance = calculate;
                         SchotterManager.updateOffline(args[0], newBallance);
-                        sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + newBallance + "§3 hinzugefügt");
+                        sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+                        try {
+                            WebHookManager.onSendDiscordMessage("AddMoney","**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", "CONSOLE"+ " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
+
                     }
                 }
             } else {
