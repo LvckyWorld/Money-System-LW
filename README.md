@@ -57,7 +57,7 @@ mysql:
   
 ```
 
-Informationsvideo zu den ConfigFiles: [Klicke hier](https://youtu.be/N6OVcCUGyWw)
+Informationsvideo zu den ConfigFiles: [Klicke hier](https://youtu.be/TqrZ_ag3JTE)
 
 # Viel Spaß wünschen
 ## LvckyAPI & IloveKOHL | Developer
