@@ -1,5 +1,6 @@
 package net.sernoxcraft.schottersystem.main;
 
+import net.sernoxcraft.schottersystem.commands.AddMoneyCommand;
 import net.sernoxcraft.schottersystem.commands.BalanceCommand;
 import net.sernoxcraft.schottersystem.commands.PayCommand;
 import net.sernoxcraft.schottersystem.commands.SetMoneyCommand;
@@ -39,7 +40,7 @@ public class Main extends JavaPlugin {
         getCommand("pay").setExecutor(new PayCommand());
         getCommand("balance").setExecutor(new BalanceCommand());
         getCommand("setmoney").setExecutor(new SetMoneyCommand());
-
+        getCommand("addmoney").setExecutor(new AddMoneyCommand());
 
 
         super.onEnable();

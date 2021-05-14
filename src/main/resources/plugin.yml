@@ -11,3 +11,6 @@ commands:
   setmoney:
     description: Set Players money
     aliases: sm
+  addmoney:
+    description: Add Money to a Player
+    aliases: am
