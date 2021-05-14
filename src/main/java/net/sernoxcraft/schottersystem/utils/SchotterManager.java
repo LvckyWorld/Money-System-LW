@@ -106,4 +106,19 @@ public class SchotterManager {
         return false;
     }
 
+    public void updateOffline(String playername, Long value){
+        if (isOfflineUserExist(playername)) {
+            try {
+                PreparedStatement ps = MySQL.getConnection().prepareStatement("UPDATE SchotterSystem SET Balance = ? WHERE Spielername = ?");
+                ps.setLong(1, value);
+                ps.setString(2, playername);
+                ps.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } else {
+            System.err.println(MySQL.sqlPrefix + "Failed, Player not exist");
+        }
+    }
+
 }
