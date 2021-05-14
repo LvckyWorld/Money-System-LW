@@ -79,7 +79,7 @@ public class PayCommand implements CommandExecutor {
                     target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
 
                     try {
-                        WebHookManager.onSendDiscordMessage("Der Spieler **" + p.getName() + "** (" + p.getUniqueId().toString() + ") hat den Spieler **" + target.getName() + "** (" + target.getUniqueId().toString() + ") **" + sum + "** Schotter gegeben", "Schotter-Manager", "");
+                        WebHookManager.onSendDiscordMessage("Überweisung","**" + p.getName() + "** (" + p.getUniqueId().toString() + ")\n\n GIBT ZU \n\n**" + target.getName() + "** (" + target.getUniqueId().toString() + ") **\n\n" + sum + "** Schotter", p.getName() + " ➛ " + sum + " ➛ " + target.getName(), "https://discord.com/api/webhooks/842700756351713281/lXJnGkNk020v4SQyVBZA0VvyBiN-KMW-V17WiCKXkECWO5TlYTjcshWtiNpL9weZC7zz");
                     } catch (Exception exception) {
                     }
 
