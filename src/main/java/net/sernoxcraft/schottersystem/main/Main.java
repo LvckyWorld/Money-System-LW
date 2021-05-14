@@ -2,6 +2,7 @@ package net.sernoxcraft.schottersystem.main;
 
 import net.sernoxcraft.schottersystem.commands.BalanceCommand;
 import net.sernoxcraft.schottersystem.commands.PayCommand;
+import net.sernoxcraft.schottersystem.commands.SetMoneyCommand;
 import net.sernoxcraft.schottersystem.listeners.Join;
 import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
 import net.sernoxcraft.schottersystem.utils.Config;
@@ -37,6 +38,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Join(), this);
         getCommand("pay").setExecutor(new PayCommand());
         getCommand("balance").setExecutor(new BalanceCommand());
+        getCommand("setmoney").setExecutor(new SetMoneyCommand());
 
 
 

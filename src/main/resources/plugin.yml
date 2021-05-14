@@ -8,3 +8,6 @@ commands:
   balance:
     description: Shows your Balance
     aliases: b
+  setmoney:
+    description: Set Players money
+    aliases: sm
