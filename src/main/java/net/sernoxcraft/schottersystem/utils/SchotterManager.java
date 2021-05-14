@@ -106,7 +106,7 @@ public class SchotterManager {
         return false;
     }
 
-    public void updateOffline(String playername, Long value){
+    public static void updateOffline(String playername, Long value){
         if (isOfflineUserExist(playername)) {
             try {
                 PreparedStatement ps = MySQL.getConnection().prepareStatement("UPDATE SchotterSystem SET Balance = ? WHERE Spielername = ?");
