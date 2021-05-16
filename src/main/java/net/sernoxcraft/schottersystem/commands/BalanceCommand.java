@@ -18,17 +18,17 @@ public class BalanceCommand implements CommandExecutor {
         if (sender instanceof Player){
             Player p = (Player) sender;
             if (args.length == 0) {
-                p.sendMessage(Main.prefix + "§3Du hast §b" + SchotterManager.getBalance(p) + "§3 Schotter");
+                p.sendMessage(Main.prefix + "§3Du hast §b" + SchotterManager.getBalance(p) + "§3 " + Main.currency);
             } else if (args.length == 1){
                 if (p.hasPermission("ss.balance.see.others")) {
                     Player t = Bukkit.getPlayer(args[0]);
                     if (t != null) {
-                        p.sendMessage(Main.prefix + "§3Der Spieler §e" + t.getName() + "§3 hat §b" + SchotterManager.getBalance(t) + "§3 Schotter");
+                        p.sendMessage(Main.prefix + "§3Der Spieler §e" + t.getName() + "§3 hat §b" + SchotterManager.getBalance(t) + "§3 " + Main.currency);
                     } else {
                         String playerName = args[0];
 
                         if (SchotterManager.isOfflineUserExist(args[0])) {
-                            p.sendMessage(Main.prefix + "§3Der Spieler §e" + playerName + "§3 hat §b" + SchotterManager.getOfflinePlayerBalance(playerName) + "§3 Schotter");
+                            p.sendMessage(Main.prefix + "§3Der Spieler §e" + playerName + "§3 hat §b" + SchotterManager.getOfflinePlayerBalance(playerName) + "§3 " + Main.currency);
                         }
 
                         p.sendMessage("§cDer spieler ist nicht online");

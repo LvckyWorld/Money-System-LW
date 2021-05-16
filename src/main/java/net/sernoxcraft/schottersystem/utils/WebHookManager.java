@@ -29,6 +29,7 @@ public class WebHookManager {
         embed.put("title", title);
         embed.put("description", content);
         embed.put("color", 16745963);
+        embed.put("avatar_url", "https://i.lvckyworld.net/sernoxcraft/SernoxCraftLogo.png");
         embed.put("timestamp", LocalDateTime.now(ZoneId.of("Africa/Abidjan")).toString());
 
         JSONArray embeds = new JSONArray();

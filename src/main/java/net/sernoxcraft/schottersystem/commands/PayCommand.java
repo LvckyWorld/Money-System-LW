@@ -21,8 +21,76 @@ public class PayCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (args.length == 2) {
+                if (args[0].equalsIgnoreCase("*")) {
+
+                    Long sum1;
+                    try {
+                        if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
+                            p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                            return false;
+                        }
+                        final Long sum2 = Long.valueOf(args[1]);
+                        sum1 = sum2;
+                    } catch (Exception e) {
+                        p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                        return false;
+                    }
+
+                    if (sum1 == 0) {
+                        p.sendMessage(Main.prefix + "§cDu musst mindestens 1 " + Main.currency + " überweisen!");
+                        return false;
+                    }
+
+
+                    //MySQL part
+                    //Sender
+                    Long balancePlayerSender = SchotterManager.getBalance(p);
+
+                    //Nicht Anfassen
+                    Long sumPlayerSender = Long.valueOf(0);
+
+                    if (balancePlayerSender > sum1 * (Bukkit.getOnlinePlayers().size() - 1)) {
+                        //EndGeld Player
+                        Long PLATZHALTER1 = sum1 * (Bukkit.getOnlinePlayers().size() - 1);
+                        sumPlayerSender = balancePlayerSender - PLATZHALTER1;
+
+                        //EndGeld Target
+
+                        Bukkit.getOnlinePlayers().forEach(players -> {
+                            if (players.getUniqueId() != p.getUniqueId()) {
+
+                                Long balancePlayerTarget = SchotterManager.getBalance(players.getPlayer());
+
+                                Long finalSum = balancePlayerTarget + sum1;
+
+                                SchotterManager.update(players.getPlayer(), finalSum);
+                                players.sendMessage(Main.prefix + "§3Du hast von dem Spieler §b" + p.getDisplayName() + "§b " + sum1 + "§3 " + Main.currency + "§3 bekommen!");
+                            }
+                        });
+
+                        //Set New MySQL Values
+
+                        SchotterManager.update(p, sumPlayerSender);
+                        Long PLATZHALTER = sum1 * (Bukkit.getOnlinePlayers().size() - 1);
+                        p.sendMessage(Main.prefix + "§3Du hast jedem Spieler §b" + sum1 + "§b " + Main.currency + "§3 überwiesen. §7(-" + PLATZHALTER + ")");
+
+
+                        try {
+                            WebHookManager.onSendDiscordMessage("Überweisung-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** "+ Main.currency,p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS" , Main.webHookURL);
+                        } catch (Exception exception) {
+                        }
+
+
+                    } else {
+                        p.sendMessage(Main.prefix + "§cSo viel Geld hast du nicht!");
+                        return false;
+                    }
+
+
+                    return false;
+                }
                 Player target = Bukkit.getPlayer(args[0]);
-                if (p.getUniqueId() == target.getUniqueId()){
+                if (p.getUniqueId() == target.getUniqueId()) {
                     p.sendMessage(Main.prefix + "§cDu kannst dir selber kein Geld geben!");
                     return false;
                 }
@@ -40,10 +108,11 @@ public class PayCommand implements CommandExecutor {
                     sum = Long.valueOf(args[1]);
                 } catch (Exception e) {
                     p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                    return false;
                 }
 
-                if (sum == 0){
-                    p.sendMessage(Main.prefix + "§cDu musst mindestens 1 Schotter überweisen!");
+                if (sum == 0) {
+                    p.sendMessage(Main.prefix + "§cDu musst mindestens 1 " + Main.currency + " überweisen!");
                     return false;
                 }
 
@@ -68,11 +137,11 @@ public class PayCommand implements CommandExecutor {
                     SchotterManager.update(p, sumPlayerSender);
                     SchotterManager.update(target, sumPlayerTarget);
 
-                    p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 Schotter überwiesen.");
-                    target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 Schotter überwiesen.");
+                    p.sendMessage(Main.prefix + "§3Du hast den Spieler " + target.getDisplayName() + "§r§b " + sum + "§r§3 " + Main.currency + " überwiesen.");
+                    target.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 " + Main.currency + " überwiesen.");
 
                     try {
-                        WebHookManager.onSendDiscordMessage("Überweisung","**" + p.getName() + "** (" + p.getUniqueId().toString() + ")\n\n GIBT ZU \n\n**" + target.getName() + "** (" + target.getUniqueId().toString() + ") **\n\n" + sum + "** Schotter", p.getName() + " ➛ " + sum + " ➛ " + target.getName(), Main.webHookURL);
+                        WebHookManager.onSendDiscordMessage("Überweisung", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ")\n\n GIBT ZU \n\n**" + target.getName() + "** (" + target.getUniqueId().toString() + ") **\n\n" + sum + "** " + Main.currency + "", p.getName() + " ➛ " + sum + " ➛ " + target.getName(), Main.webHookURL);
                     } catch (Exception exception) {
                     }
 

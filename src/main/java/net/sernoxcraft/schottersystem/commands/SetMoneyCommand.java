@@ -42,7 +42,7 @@ public class SetMoneyCommand implements CommandExecutor {
                         }
                         if (SchotterManager.isOfflineUserExist(args[0])){
                             SchotterManager.updateOffline(args[0], amount1);
-                            p.sendMessage(Main.prefix + "§3Du hast das Schotter des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount1 + "§3 gesetzt");
+                            p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount1 + "§3 gesetzt");
 
 
                         } else {
@@ -71,11 +71,11 @@ public class SetMoneyCommand implements CommandExecutor {
 
                     //Set new Money
                     SchotterManager.update(t, amount);
-                    p.sendMessage(Main.prefix + "§3Du hast das Schotter des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
-                    t.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein Schotter auf §b" + amount + "§3 gestetzt");
+                    p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
+                    t.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + Main.currency + " auf §b" + amount + "§3 gestetzt");
 
                     try {
-                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** Schotter", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** "+ Main.currency +"", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -100,9 +100,9 @@ public class SetMoneyCommand implements CommandExecutor {
             }
             if (SchotterManager.isOfflineUserExist(args[0])){
                 SchotterManager.updateOffline(args[0], amount2);
-                s.sendMessage(Main.prefix + "§3Du hast das Schotter des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount2 + "§3 gesetzt");
+                s.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount2 + "§3 gesetzt");
                 try {
-                    WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + "CONSOLE" + "**\n\nSETZT\n\n**" + args[0] + "**\n**" + amount2 + "** Schotter", "CONSOLE" + " ➛ " + amount2 + " ➛ " + args[0], Main.webHookURL);
+                    WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + "CONSOLE" + "**\n\nSETZT\n\n**" + args[0] + "**\n**" + amount2 + "** "+ Main.currency +"", "CONSOLE" + " ➛ " + amount2 + " ➛ " + args[0], Main.webHookURL);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

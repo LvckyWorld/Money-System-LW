@@ -29,6 +29,68 @@ public class AddMoneyCommand implements CommandExecutor {
             if (p.hasPermission("ss.addmoney")) {
 
                 if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("*")) {
+
+                        Long sum1;
+                        try {
+                            if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
+                                p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                                return false;
+                            }
+                            final Long sum2 = Long.valueOf(args[1]);
+                            sum1 = sum2;
+                        } catch (Exception e) {
+                            p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                            return false;
+                        }
+
+                        if (sum1 == 0) {
+                            p.sendMessage(Main.prefix + "§cDu musst mindestens 1 " + Main.currency + " überweisen!");
+                            return false;
+                        }
+
+
+                        //MySQL part
+                        //Sender
+                        Long balancePlayerSender = SchotterManager.getBalance(p);
+
+                        //Nicht Anfassen
+                        Long sumPlayerSender = Long.valueOf(0);
+
+
+                        //EndGeld Player
+                        Long PLATZHALTER1 = sum1 * (Bukkit.getOnlinePlayers().size() - 1);
+                        sumPlayerSender = balancePlayerSender - PLATZHALTER1;
+
+                        //EndGeld Target
+
+                        Bukkit.getOnlinePlayers().forEach(players -> {
+                            if (players.getUniqueId() != p.getUniqueId()) {
+
+                                Long balancePlayerTarget = SchotterManager.getBalance(players.getPlayer());
+
+                                Long finalSum = balancePlayerTarget + sum1;
+
+                                SchotterManager.update(players.getPlayer(), finalSum);
+                                players.sendMessage(Main.prefix + "§3Du hast§b " + sum1 + "§3 " + Main.currency + "§3 bekommen!");
+                            }
+                        });
+
+                        //Set New MySQL Values
+
+                        p.sendMessage(Main.prefix + "§3Du hast jedem Spieler §b" + sum1 + "§b " + Main.currency + "§3 gegeben.");
+
+
+                        try {
+                            WebHookManager.onSendDiscordMessage("Add-Money-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + Main.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", Main.webHookURL);
+                        } catch (Exception exception) {
+                        }
+
+
+                        return false;
+                    }
+
+
                     Long amount = 0l;
                     try {
                         if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
@@ -49,11 +111,11 @@ public class AddMoneyCommand implements CommandExecutor {
                         Long newBallance = calculate;
 
                         SchotterManager.update(t, newBallance);
-                        p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 hinzugefügt");
-                        t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 Schotter bekommen.");
+                        p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 " + Main.currency + " hinzugefügt");
+                        t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
 
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney","**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                            WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -68,7 +130,7 @@ public class AddMoneyCommand implements CommandExecutor {
                             p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
 
                             try {
-                                WebHookManager.onSendDiscordMessage("AddMoney","**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                                WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                             } catch (Exception exception) {
                                 exception.printStackTrace();
                             }
@@ -105,9 +167,9 @@ public class AddMoneyCommand implements CommandExecutor {
 
                     SchotterManager.update(t, newBallance);
                     sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
-                    t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 Schotter bekommen.");
+                    t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
                     try {
-                        WebHookManager.onSendDiscordMessage("AddMoney","**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", "CONSOLE"+ " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                        WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -119,7 +181,7 @@ public class AddMoneyCommand implements CommandExecutor {
                         SchotterManager.updateOffline(args[0], newBallance);
                         sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney","**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** Schotter", "CONSOLE"+ " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                            WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
