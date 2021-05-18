@@ -26,9 +26,7 @@ public class Main extends JavaPlugin {
     public static Long startBalance = 0L;
 
     public static Main plugin;
-    public static Main getPlugin() {
-        return plugin;
-    }
+
     @Override
     public void onEnable() {
         plugin = this;
