@@ -57,7 +57,7 @@ public class PayCommand implements CommandExecutor {
                 Long sumPlayerSender = Long.valueOf(0);
                 Long sumPlayerTarget = Long.valueOf(0);
 
-                if (balancePlayerSender > sum) {
+                if (balancePlayerSender >= sum) {
                     //EndGeld Player
                     sumPlayerSender = balancePlayerSender - sum;
                     //EndGeld Target
