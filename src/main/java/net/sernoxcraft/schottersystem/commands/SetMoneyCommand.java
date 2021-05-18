@@ -28,14 +28,14 @@ public class SetMoneyCommand implements CommandExecutor {
                     Player t = Bukkit.getPlayer(args[0]);
                     //Start Offline Part
                     if (t == null) {
-                        Long amount1 = 0l;
+                        long amount1;
                         //Start If amount is valid
                         try {
                             if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
                                 p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                                 return false;
                             }
-                            amount1 = Long.valueOf(args[1]);
+                            amount1 = Long.parseLong(args[1]);
                         } catch (Exception e) {
                             p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
@@ -43,57 +43,48 @@ public class SetMoneyCommand implements CommandExecutor {
                         if (SchotterManager.isOfflineUserExist(args[0])){
                             SchotterManager.updateOffline(args[0], amount1);
                             p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount1 + "§3 gesetzt");
-
-
                         } else {
                             p.sendMessage(Main.prefix + "§cDer User ist dem Netzwerk nicht bekannt!");
                         }
-
-
                         return false;
                     }
-
                     //Stop Offline Part
-
-                    Long amount = 0l;
+                    long amount;
                     //Start If amount is valid
                     try {
                         if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
                             p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
                         }
-                        amount = Long.valueOf(args[1]);
+                        amount = Long.parseLong(args[1]);
                     } catch (Exception e) {
                         p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                         return false;
                     }
                     //Stop If amount is valid
-
                     //Set new Money
                     SchotterManager.update(t, amount);
                     p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
                     t.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + Main.currency + " auf §b" + amount + "§3 gestetzt");
-
                     try {
                         WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** "+ Main.currency +"", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-
                 } else {
                     p.sendMessage(Main.prefix + "§cFalsche Usage. Benutze bitte§7: §b/setmoney <user> <summe>");
                 }
             }
         } else {
             ConsoleCommandSender s = (ConsoleCommandSender) sender;
-            Long amount2 = 0l;
+            long amount2;
             //Start If amount is valid
             try {
                 if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
                     s.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                     return false;
                 }
-                amount2 = Long.valueOf(args[1]);
+                amount2 = Long.parseLong(args[1]);
             } catch (Exception e) {
                 s.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                 return false;
@@ -106,13 +97,10 @@ public class SetMoneyCommand implements CommandExecutor {
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-
             } else {
                 s.sendMessage(Main.prefix + "§cDer User ist dem Netzwerk nicht bekannt!");
             }
-
         }
-
         return false;
     }
 }

@@ -11,8 +11,6 @@ import org.bukkit.entity.Player;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
-
 public class SchotterManager {
 
     public static boolean isUserExist(Player p){

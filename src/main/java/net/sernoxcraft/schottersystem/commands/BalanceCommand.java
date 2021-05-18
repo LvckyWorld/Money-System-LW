@@ -26,11 +26,9 @@ public class BalanceCommand implements CommandExecutor {
                         p.sendMessage(Main.prefix + "§3Der Spieler §e" + t.getName() + "§3 hat §b" + SchotterManager.getBalance(t) + "§3 " + Main.currency);
                     } else {
                         String playerName = args[0];
-
                         if (SchotterManager.isOfflineUserExist(args[0])) {
                             p.sendMessage(Main.prefix + "§3Der Spieler §e" + playerName + "§3 hat §b" + SchotterManager.getOfflinePlayerBalance(playerName) + "§3 " + Main.currency);
                         }
-
                         p.sendMessage("§cDer spieler ist nicht online");
                     }
                 } else {
@@ -42,10 +40,7 @@ public class BalanceCommand implements CommandExecutor {
                 } else {
                     p.sendMessage("§3Mache §e/balance ");
                 }
-
             }
-
-
         }
         return false;
     }

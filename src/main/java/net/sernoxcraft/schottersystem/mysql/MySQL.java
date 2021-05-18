@@ -37,7 +37,6 @@ public class MySQL {
     /**
      * Schließt die Datenbank verbindung wenn eine Verbindung besteht
      *
-     * @throws SQLException
      * @author LvckyAPI
      * @since 10/05/2021
      */

@@ -1,16 +1,16 @@
 name: SchotterSystem
 main: net.sernoxcraft.schottersystem.main.Main
-version: 1.0
-author: Iven S. Lukas Oe.
+version: 1.1
+author: Iven S. & Lukas Oe. | LvckyAPI & IloveKOHL
 commands:
   pay:
-    description: Pay People for BlowJobs
+    description: Bezahle andere Spieler
   balance:
-    description: Shows your Balance
+    description: Zeigt dir deinen Kontostand
     aliases: b
   setmoney:
-    description: Set Players money
+    description: Setzt einem Spieler ein bestimmte Summe
     aliases: sm
   addmoney:
-    description: Add Money to a Player
+    description: Fügt einem Spieler Geld hinzu
     aliases: am

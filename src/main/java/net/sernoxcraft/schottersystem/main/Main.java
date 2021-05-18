@@ -5,12 +5,13 @@ import net.sernoxcraft.schottersystem.commands.BalanceCommand;
 import net.sernoxcraft.schottersystem.commands.PayCommand;
 import net.sernoxcraft.schottersystem.commands.SetMoneyCommand;
 import net.sernoxcraft.schottersystem.listeners.Join;
+import net.sernoxcraft.schottersystem.mysql.MySQL;
 import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
 import net.sernoxcraft.schottersystem.utils.Config;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -22,7 +23,7 @@ public class Main extends JavaPlugin {
     public static String webHookURL = "";
     public static String currency = "";
 
-    public static Long startBalance = Long.valueOf(0);
+    public static Long startBalance = 0L;
 
     public static Main plugin;
     public static Main getPlugin() {
@@ -40,7 +41,7 @@ public class Main extends JavaPlugin {
         prefix = Config.config.getString("Prefix");
         webHookURL = Config.config.getString("DiscordWebHookURL");
         currency = Config.config.getString("Currency");
-        startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
+        startBalance = Config.config.getLong("StartBalance");
 
         getServer().getPluginManager().registerEvents(new Join(), this);
         getCommand("pay").setExecutor(new PayCommand());
@@ -54,6 +55,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        try {
+            MySQL.disconnect();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         super.onDisable();
     }
 

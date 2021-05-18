@@ -1,6 +1,5 @@
 package net.sernoxcraft.schottersystem.systemmanager;
 
-import net.sernoxcraft.schottersystem.main.Main;
 import net.sernoxcraft.schottersystem.mysql.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,12 +26,7 @@ public class SystemManager {
     private static String USER;
     private static String PASSWORD;
 
-
-    FileConfiguration cfg = Main.getPlugin().getConfig();
-    String pref = cfg.getString("Config.prefix").replaceAll("&","§") + "§r ";
-
     private static String prefix;
-
     private static final String debugPrefix =  prefix + "§b[Debug] §4";
 
 
@@ -45,7 +39,7 @@ public class SystemManager {
         readMySQL();
 
         FileConfiguration cfg = getConfiguration();
-        Boolean MySQLAllowed = cfg.getBoolean("mysql.use");
+        boolean MySQLAllowed = cfg.getBoolean("mysql.use");
         if (MySQLAllowed) {
             try {
                 Bukkit.getConsoleSender().sendMessage(debugPrefix + "setup() in startUp()");
@@ -59,7 +53,6 @@ public class SystemManager {
 
     public static void setup() throws SQLException {
         Bukkit.getConsoleSender().sendMessage(debugPrefix + "setup()");
-        FileConfiguration cfg = getConfiguration();
         MySQL.connect();
         PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS SchotterSystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
         ps.executeUpdate();
@@ -76,7 +69,6 @@ public class SystemManager {
             FileConfiguration cfg = getConfiguration();
             cfg.set("mysql.use", false);
             cfg.set("mysql.host", "< Deinen MySQL Hoster eintragen >");
-            cfg.set("mysql.port", "< Deinen MySQL Port eintragen >");
             cfg.set("mysql.user", "< Deinen MySQL User eintragen >");
             cfg.set("mysql.datenbase", "< Deine MySQL Datenbase eintragen >");
             cfg.set("mysql.passwort", "< Dein MySQL Passwort eintragen >");
@@ -93,7 +85,6 @@ public class SystemManager {
         Bukkit.getConsoleSender().sendMessage(debugPrefix + "readMySQL");
         FileConfiguration cfg = getConfiguration();
         setHOST(cfg.getString("mysql.host"));
-        setPORT(cfg.getString("mysql.user"));
         setUSER(cfg.getString("mysql.user"));
         setDATABASE(cfg.getString("mysql.datenbase"));
         setPASSWORD(cfg.getString("mysql.passwort"));
@@ -108,13 +99,6 @@ public class SystemManager {
 
     public static void setHOST(String hOST) {
         HOST = hOST;
-    }
-
-    public static String getPORT() {
-        return PORT;
-    }
-    public static void setPORT(String pORT) {
-        PORT = pORT;
     }
 
     public static String getDATABASE() {

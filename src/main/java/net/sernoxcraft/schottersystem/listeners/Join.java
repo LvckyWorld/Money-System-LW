@@ -17,7 +17,9 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+        // If Player not exist in database
         if (!SchotterManager.isUserExist(p)){
+            // Add Player to database with start Balance
             SchotterManager.firstConnect(p, Main.startBalance);
         }
     }
