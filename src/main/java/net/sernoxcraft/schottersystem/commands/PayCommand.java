@@ -25,7 +25,7 @@ public class PayCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("*")) {
                     Long sum1;
                     try {
-                        if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
+                        if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/") || args[1].contains(".") || args[1].contains(",")) {
                             p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
                         }

@@ -5,6 +5,7 @@ package net.sernoxcraft.schottersystem.api;
  */
 
 
+import net.sernoxcraft.schottersystem.main.Main;
 import net.sernoxcraft.schottersystem.mysql.MySQL;
 import org.bukkit.entity.Player;
 
@@ -159,6 +160,39 @@ public class SchotterAPI {
         } else {
             System.err.println(MySQL.sqlPrefix + "Failed, Player not exist");
         }
+    }
+
+    /**
+     * Get the Currency
+     * @return The Currency
+     */
+    public static String getCurrency() {
+        return Main.currency;
+    }
+
+
+    /**
+     * Remove money to Player (ONLY WHOLE NUMBERS)
+     * @param p Player to remove Money
+     * @param value How much Money should be removed
+     * @param lowBalanceException Error Message if player don't have enough Money
+     */
+    public static void removeMoney(Player p, Long value, String lowBalanceException) {
+        if (value <= getBalance(p)) {
+            Long result = SchotterAPI.getBalance(p) - value;
+            SchotterAPI.update(p, result);
+        } else {
+         p.sendMessage(lowBalanceException);
+        }
+    }
+
+    /**
+     * Add money to Player (ONLY WHOLE NUMBERS)
+     * @param p Player to add Money
+     * @param value Value to add
+     */
+    public static void addMoney(Player p, Long value) {
+        Long result = SchotterAPI.getBalance(p) + value;
     }
 
 
