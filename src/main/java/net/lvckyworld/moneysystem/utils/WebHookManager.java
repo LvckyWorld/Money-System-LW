@@ -1,4 +1,4 @@
-package net.sernoxcraft.schottersystem.utils;
+package net.lvckyworld.moneysystem.utils;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,5 +1,5 @@
 name: SchotterSystem
-main: net.sernoxcraft.schottersystem.main.Main
+main: net.lvckyworld.moneysystem.main.Main
 version: 1.0
 author: Iven S. Lukas Oe.
 commands:

@@ -1,7 +1,7 @@
-package net.sernoxcraft.schottersystem.systemmanager;
+package net.lvckyworld.moneysystem.systemmanager;
 
-import net.sernoxcraft.schottersystem.main.Main;
-import net.sernoxcraft.schottersystem.mysql.MySQL;
+import net.lvckyworld.moneysystem.mysql.MySQL;
+import net.lvckyworld.moneysystem.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import static net.sernoxcraft.schottersystem.mysql.MySQL.sqlPrefix;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -63,7 +61,7 @@ public class SystemManager {
         MySQL.connect();
         PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS SchotterSystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
         ps.executeUpdate();
-        Bukkit.getConsoleSender().sendMessage(sqlPrefix + "§aSchotterSystem registriert");
+        Bukkit.getConsoleSender().sendMessage(MySQL.sqlPrefix + "§aSchotterSystem registriert");
     }
 
 

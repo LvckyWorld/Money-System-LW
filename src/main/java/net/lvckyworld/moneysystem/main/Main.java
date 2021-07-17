@@ -1,13 +1,12 @@
-package net.sernoxcraft.schottersystem.main;
+package net.lvckyworld.moneysystem.main;
 
-import net.sernoxcraft.schottersystem.commands.AddMoneyCommand;
-import net.sernoxcraft.schottersystem.commands.BalanceCommand;
-import net.sernoxcraft.schottersystem.commands.PayCommand;
-import net.sernoxcraft.schottersystem.commands.SetMoneyCommand;
-import net.sernoxcraft.schottersystem.listeners.Join;
-import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
-import net.sernoxcraft.schottersystem.utils.Config;
-import org.bukkit.Bukkit;
+import net.lvckyworld.moneysystem.commands.AddMoneyCommand;
+import net.lvckyworld.moneysystem.commands.BalanceCommand;
+import net.lvckyworld.moneysystem.commands.PayCommand;
+import net.lvckyworld.moneysystem.systemmanager.SystemManager;
+import net.lvckyworld.moneysystem.commands.SetMoneyCommand;
+import net.lvckyworld.moneysystem.listeners.Join;
+import net.lvckyworld.moneysystem.utils.Config;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -50,6 +49,7 @@ public class Main extends JavaPlugin {
 
 
         super.onEnable();
+
     }
 
     @Override

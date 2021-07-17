@@ -1,6 +1,6 @@
-package net.sernoxcraft.schottersystem.mysql;
+package net.lvckyworld.moneysystem.mysql;
 
-import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
+import net.lvckyworld.moneysystem.systemmanager.SystemManager;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;

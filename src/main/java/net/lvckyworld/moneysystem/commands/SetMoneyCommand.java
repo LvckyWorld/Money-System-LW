@@ -1,13 +1,13 @@
-package net.sernoxcraft.schottersystem.commands;
+package net.lvckyworld.moneysystem.commands;
 /*
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
  * Licensed to Iven Schlenther & Lukas Oetken
  */
 
 
-import net.sernoxcraft.schottersystem.main.Main;
-import net.sernoxcraft.schottersystem.utils.SchotterManager;
-import net.sernoxcraft.schottersystem.utils.WebHookManager;
+import net.lvckyworld.moneysystem.main.Main;
+import net.lvckyworld.moneysystem.utils.MySQLHandler;
+import net.lvckyworld.moneysystem.utils.WebHookManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,8 +40,8 @@ public class SetMoneyCommand implements CommandExecutor {
                             p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
                         }
-                        if (SchotterManager.isOfflineUserExist(args[0])){
-                            SchotterManager.updateOffline(args[0], amount1);
+                        if (MySQLHandler.isOfflineUserExist(args[0])){
+                            MySQLHandler.updateOffline(args[0], amount1);
                             p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount1 + "§3 gesetzt");
 
 
@@ -70,7 +70,7 @@ public class SetMoneyCommand implements CommandExecutor {
                     //Stop If amount is valid
 
                     //Set new Money
-                    SchotterManager.update(t, amount);
+                    MySQLHandler.update(t, amount);
                     p.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
                     t.sendMessage(Main.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + Main.currency + " auf §b" + amount + "§3 gestetzt");
 
@@ -98,8 +98,8 @@ public class SetMoneyCommand implements CommandExecutor {
                 s.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
                 return false;
             }
-            if (SchotterManager.isOfflineUserExist(args[0])){
-                SchotterManager.updateOffline(args[0], amount2);
+            if (MySQLHandler.isOfflineUserExist(args[0])){
+                MySQLHandler.updateOffline(args[0], amount2);
                 s.sendMessage(Main.prefix + "§3Du hast das " + Main.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount2 + "§3 gesetzt");
                 try {
                     WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + "CONSOLE" + "**\n\nSETZT\n\n**" + args[0] + "**\n**" + amount2 + "** "+ Main.currency +"", "CONSOLE" + " ➛ " + amount2 + " ➛ " + args[0], Main.webHookURL);

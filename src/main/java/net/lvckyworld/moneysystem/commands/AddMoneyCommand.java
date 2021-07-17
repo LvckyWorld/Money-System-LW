@@ -1,21 +1,19 @@
-package net.sernoxcraft.schottersystem.commands;
+package net.lvckyworld.moneysystem.commands;
 /*
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
  * Licensed to Iven Schlenther & Lukas Oetken
  */
 
 
-import net.sernoxcraft.schottersystem.main.Main;
-import net.sernoxcraft.schottersystem.utils.SchotterManager;
-import net.sernoxcraft.schottersystem.utils.WebHookManager;
+import net.lvckyworld.moneysystem.api.LvckyMoneyAPI;
+import net.lvckyworld.moneysystem.utils.MySQLHandler;
+import net.lvckyworld.moneysystem.utils.WebHookManager;
+import net.lvckyworld.moneysystem.main.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static net.sernoxcraft.schottersystem.api.SchotterAPI.getBalance;
-import static net.sernoxcraft.schottersystem.api.SchotterAPI.isOfflineUserExist;
 
 public class AddMoneyCommand implements CommandExecutor {
 
@@ -52,7 +50,7 @@ public class AddMoneyCommand implements CommandExecutor {
 
                         //MySQL part
                         //Sender
-                        Long balancePlayerSender = SchotterManager.getBalance(p);
+                        Long balancePlayerSender = MySQLHandler.getBalance(p);
 
                         //Nicht Anfassen
                         Long sumPlayerSender = Long.valueOf(0);
@@ -67,11 +65,11 @@ public class AddMoneyCommand implements CommandExecutor {
                         Bukkit.getOnlinePlayers().forEach(players -> {
                             if (players.getUniqueId() != p.getUniqueId()) {
 
-                                Long balancePlayerTarget = SchotterManager.getBalance(players.getPlayer());
+                                Long balancePlayerTarget = MySQLHandler.getBalance(players.getPlayer());
 
                                 Long finalSum = balancePlayerTarget + sum1;
 
-                                SchotterManager.update(players.getPlayer(), finalSum);
+                                MySQLHandler.update(players.getPlayer(), finalSum);
                                 players.sendMessage(Main.prefix + "§3Du hast§b " + sum1 + "§3 " + Main.currency + "§3 bekommen!");
                             }
                         });
@@ -106,11 +104,11 @@ public class AddMoneyCommand implements CommandExecutor {
                     Player t = Bukkit.getPlayer(args[0]);
 
                     if (t != null) {
-                        Long ballanceNow = SchotterManager.getBalance(t);
+                        Long ballanceNow = MySQLHandler.getBalance(t);
                         Long calculate = ballanceNow + amount;
                         Long newBallance = calculate;
 
-                        SchotterManager.update(t, newBallance);
+                        MySQLHandler.update(t, newBallance);
                         p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 " + Main.currency + " hinzugefügt");
                         t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
 
@@ -122,11 +120,11 @@ public class AddMoneyCommand implements CommandExecutor {
 
 
                     } else {
-                        if (isOfflineUserExist(args[0])) {
-                            Long ballanceNow = SchotterManager.getOfflinePlayerBalance(args[0]);
+                        if (LvckyMoneyAPI.isOfflineUserExist(args[0])) {
+                            Long ballanceNow = MySQLHandler.getOfflinePlayerBalance(args[0]);
                             Long calculate = ballanceNow + amount;
                             Long newBallance = calculate;
-                            SchotterManager.updateOffline(args[0], newBallance);
+                            MySQLHandler.updateOffline(args[0], newBallance);
                             p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
 
                             try {
@@ -161,11 +159,11 @@ public class AddMoneyCommand implements CommandExecutor {
                 Player t = Bukkit.getPlayer(args[0]);
 
                 if (t != null) {
-                    Long ballanceNow = SchotterManager.getBalance(t);
+                    Long ballanceNow = MySQLHandler.getBalance(t);
                     Long calculate = ballanceNow + amount;
                     Long newBallance = calculate;
 
-                    SchotterManager.update(t, newBallance);
+                    MySQLHandler.update(t, newBallance);
                     sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                     t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
                     try {
@@ -174,11 +172,11 @@ public class AddMoneyCommand implements CommandExecutor {
                         exception.printStackTrace();
                     }
                 } else {
-                    if (isOfflineUserExist(args[0])) {
-                        Long ballanceNow = SchotterManager.getOfflinePlayerBalance(args[0]);
+                    if (LvckyMoneyAPI.isOfflineUserExist(args[0])) {
+                        Long ballanceNow = MySQLHandler.getOfflinePlayerBalance(args[0]);
                         Long calculate = ballanceNow + amount;
                         Long newBallance = calculate;
-                        SchotterManager.updateOffline(args[0], newBallance);
+                        MySQLHandler.updateOffline(args[0], newBallance);
                         sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                         try {
                             WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
