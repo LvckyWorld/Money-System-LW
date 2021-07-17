@@ -1,6 +1,6 @@
-# SernoxCraft-SchotterSystem
+# Money-System-LW
 
-Das SernoxCraft-SchoteerSystem ist ein professionelles und vollmodulares Money-System.
+Das Money-System-LW ist ein professionelles und vollmodulares Money-System.
 Die Spieler habe durch das Plugin die Möglichkeit, mit einer auswäglbaren Ingamewährung Ingamekäufe abzuschließen. 
 Dabei wird auf grund der Perforance auf eine Datenbankverbindung gestzt welche in der "MySQL.yml" konfiguriertt werdenkann gesetzt.
 Das SchotterSystem verfügt desweiteren über ein LogSystem, welche alle Transaktionen per Webhook auf einen Discord-Server protokolliert.

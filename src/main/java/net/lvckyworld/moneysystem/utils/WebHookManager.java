@@ -4,15 +4,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.awt.*;
 import java.io.OutputStream;
 import java.net.URL;
-import java.sql.Time;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -22,9 +16,6 @@ public class WebHookManager {
 
 
     public static void onSendDiscordMessage(String title, String content, String username, String WebHookURL) throws Exception {
-
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .toFormatter(Locale.GERMANY);
         JSONObject embed = new JSONObject();
         embed.put("title", title);
         embed.put("description", content);
