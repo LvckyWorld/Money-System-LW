@@ -1,5 +1,6 @@
 package net.lvckyworld.moneysystem;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.lvckyworld.moneysystem.commands.*;
 import net.lvckyworld.moneysystem.systemmanager.SystemManager;
 import net.lvckyworld.moneysystem.listeners.Join;
@@ -17,6 +18,7 @@ public class LWMoneySystem extends JavaPlugin {
     public static String prefix = "";
     public static String webHookURL = "";
     public static String currency = "";
+    public static Boolean useWebHook;
 
     public static Long startBalance = 0L;
 
@@ -34,6 +36,8 @@ public class LWMoneySystem extends JavaPlugin {
         SystemManager.startUp();
 
         prefix = Config.config.getString("Prefix").replaceAll("&", "§");
+
+        useWebHook = Config.config.getBoolean("UseDiscordLog");
         webHookURL = Config.config.getString("DiscordWebHookURL");
         currency = Config.config.getString("Currency");
         startBalance = Config.config.getLong("StartBalance");
@@ -62,6 +66,7 @@ public class LWMoneySystem extends JavaPlugin {
             Config.config.set("Prefix", "&b&lLvcky&a&lMoney&b&lSystem&r ");
             Config.config.set("StartBalance", 1000);
             Config.config.set("Currency", "Schotter");
+            Config.config.set("UseDiscordLog", false);
             Config.config.set("DiscordWebHookURL", "Discord Log ChannelWebhook smth. like that(https://discord.com/api/webhooks/1231212332/vyBiNk020v4SQvyBiNvyBiN-KMW-V17WiCvyBiNlYTjcshWtiNpL9weZC7zz)");
 
             try {

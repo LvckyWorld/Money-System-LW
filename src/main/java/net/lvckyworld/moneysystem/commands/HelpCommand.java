@@ -20,11 +20,12 @@ public class HelpCommand implements CommandExecutor {
             p.sendMessage("§7§m§l--------------§r§7[" + LWMoneySystem.prefix + "§r§7]§m§l--------------");
             p.sendMessage(" ");
             p.sendMessage("§aUser-Commands:");
-            p.sendMessage("§7/pay <Name> <Summe> | Gibt einen von dir ausgewählter Spieler dein Geld.");
-            p.sendMessage("§7/balance <Name> | Zeigt dir von dir ausgewählter Spieler sein Geld.");
+            p.sendMessage("§7/pay <Name> <Summe>      | Gibt einem von dir ausgewählter Spieler dein Geld.");
+            p.sendMessage("§7/balance                 | Zeigt dir das Geld, welches du besitzt.");
             p.sendMessage("§cAdmin-Commands:");
-            p.sendMessage("§7/setmoney <Name> <Summe> | Setzt von dir ausgewählter Spieler sein Geld.");
-            p.sendMessage("§7/addmoney <Name> <Summe> | Gibt von dir ausgewählter Spieler Geld.");
+            p.sendMessage("§7/balance <Name>          | Zeigt dir das Geld an, welches ein ausgewählter Spieler besitzt.");
+            p.sendMessage("§7/setmoney <Name> <Summe> | Setzt von dir ausgewähltem Spieler Geld.");
+            p.sendMessage("§7/addmoney <Name> <Summe> | Gibt von dir ausgewähltem Spieler Geld.");
             p.sendMessage(" ");
             p.sendMessage("§7§m§l--------------§r§7[" + LWMoneySystem.prefix + "§r§7]§m§l--------------");
 

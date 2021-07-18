@@ -1,5 +1,6 @@
 package net.lvckyworld.moneysystem.utils;
 
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,6 +18,9 @@ public class WebHookManager {
 
 
     public static void onSendDiscordMessage(String title, String content, String username, String WebHookURL) throws Exception {
+        if (!LWMoneySystem.useWebHook) {
+            return;
+        }
         JSONObject embed = new JSONObject();
         embed.put("title", title);
         embed.put("description", content);
