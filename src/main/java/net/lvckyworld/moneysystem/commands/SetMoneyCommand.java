@@ -67,7 +67,7 @@ public class SetMoneyCommand implements CommandExecutor {
                     p.sendMessage(LWMoneySystem.prefix + "§3Du hast das " + LWMoneySystem.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
                     t.sendMessage(LWMoneySystem.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + LWMoneySystem.currency + " auf §b" + amount + "§3 gestetzt");
                     try {
-                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** "+ LWMoneySystem.currency +"", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** "+ LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }

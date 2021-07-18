@@ -33,7 +33,7 @@ public class LWMoneySystem extends JavaPlugin {
 
         SystemManager.startUp();
 
-        prefix = Config.config.getString("Prefix");
+        prefix = Config.config.getString("Prefix").replaceAll("&", "§");
         webHookURL = Config.config.getString("DiscordWebHookURL");
         currency = Config.config.getString("Currency");
         startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
@@ -59,7 +59,7 @@ public class LWMoneySystem extends JavaPlugin {
 
     public void loadConfigFirst(){
         if (!Config.configFile.exists()){
-            Config.config.set("Prefix", "§b§lSernox§a§lCraft §8➛§r ");
+            Config.config.set("Prefix", "&b&lLvcky&a&lMoney&b&lSystem&r ");
             Config.config.set("StartBalance", 1000);
             Config.config.set("Currency", "Schotter");
             Config.config.set("DiscordWebHookURL", "Discord Log ChannelWebhook smth. like that(https://discord.com/api/webhooks/1231212332/vyBiNk020v4SQvyBiNvyBiN-KMW-V17WiCvyBiNlYTjcshWtiNpL9weZC7zz)");

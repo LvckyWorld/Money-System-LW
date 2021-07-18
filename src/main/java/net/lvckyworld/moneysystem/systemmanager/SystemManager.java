@@ -65,7 +65,7 @@ public class SystemManager {
     }
 
 
-    private static File getMySQL() {return new File("plugins/SchotterSystem/MySQL.yml");}
+    private static File getMySQL() {return new File("plugins/LW-MoneySystem/MySQL.yml");}
     private static FileConfiguration getConfiguration() { return YamlConfiguration.loadConfiguration(getMySQL()); }
 
     private static void loadConfig() {

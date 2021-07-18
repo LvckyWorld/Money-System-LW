@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Config {
 
 
-    public static File configFile = new File("plugins/SchotterSystem", "config.yml");
+    public static File configFile = new File("plugins/LW-MoneySystem", "config.yml");
     public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
 
