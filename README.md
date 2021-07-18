@@ -12,7 +12,7 @@ Prefix, Währung  und Discord-Webhook-URL sind in der "config.yml" einstellbar. 
 Command                                   | Permission              | Funktion
 
 /balance                                  | -------------           | Zeigt dir deinen aktuellen Kontostand
-/pay <player> <ammount>                   | -------------           | Überwist einem anderen Spiler Geld
+/pay <player> <ammount>                   | -------------           | Überwist einem anderen Spieler Geld
 ```
 
 
