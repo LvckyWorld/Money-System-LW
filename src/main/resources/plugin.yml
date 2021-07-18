@@ -14,3 +14,6 @@ commands:
   addmoney:
     description: Add Money to a Player
     aliases: am
+  moneysystem:
+    description: Shows Help-Page
+    aliases: ms

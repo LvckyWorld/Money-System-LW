@@ -1,10 +1,7 @@
 package net.lvckyworld.moneysystem;
 
-import net.lvckyworld.moneysystem.commands.AddMoneyCommand;
-import net.lvckyworld.moneysystem.commands.BalanceCommand;
-import net.lvckyworld.moneysystem.commands.PayCommand;
+import net.lvckyworld.moneysystem.commands.*;
 import net.lvckyworld.moneysystem.systemmanager.SystemManager;
-import net.lvckyworld.moneysystem.commands.SetMoneyCommand;
 import net.lvckyworld.moneysystem.listeners.Join;
 import net.lvckyworld.moneysystem.utils.Config;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +43,9 @@ public class LWMoneySystem extends JavaPlugin {
         getCommand("balance").setExecutor(new BalanceCommand());
         getCommand("setmoney").setExecutor(new SetMoneyCommand());
         getCommand("addmoney").setExecutor(new AddMoneyCommand());
+
+        getCommand("moneysystem").setExecutor(new HelpCommand());
+
 
 
         super.onEnable();
