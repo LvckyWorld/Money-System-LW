@@ -1,5 +1,5 @@
-name: SchotterSystem
-main: net.sernoxcraft.schottersystem.main.Main
+name: LW-MoneySystem
+main: net.lvckyworld.moneysystem.LWMoneySystem
 version: 1.0
 author: Iven S. Lukas Oe.
 commands:
@@ -14,3 +14,6 @@ commands:
   addmoney:
     description: Add Money to a Player
     aliases: am
+  moneysystem:
+    description: Shows Help-Page
+    aliases: ms

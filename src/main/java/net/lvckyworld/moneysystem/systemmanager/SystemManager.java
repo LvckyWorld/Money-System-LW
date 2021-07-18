@@ -1,7 +1,7 @@
-package net.sernoxcraft.schottersystem.systemmanager;
+package net.lvckyworld.moneysystem.systemmanager;
 
-import net.sernoxcraft.schottersystem.main.Main;
-import net.sernoxcraft.schottersystem.mysql.MySQL;
+import net.lvckyworld.moneysystem.mysql.MySQL;
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import static net.sernoxcraft.schottersystem.mysql.MySQL.sqlPrefix;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -28,7 +26,7 @@ public class SystemManager {
     private static String PASSWORD;
 
 
-    FileConfiguration cfg = Main.getPlugin().getConfig();
+    FileConfiguration cfg = LWMoneySystem.getPlugin().getConfig();
     String pref = cfg.getString("Config.prefix").replaceAll("&","§") + "§r ";
 
     private static String prefix;
@@ -61,13 +59,13 @@ public class SystemManager {
         Bukkit.getConsoleSender().sendMessage(debugPrefix + "setup()");
         FileConfiguration cfg = getConfiguration();
         MySQL.connect();
-        PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS SchotterSystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
+        PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS LvckyWorldMoneySystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
         ps.executeUpdate();
-        Bukkit.getConsoleSender().sendMessage(sqlPrefix + "§aSchotterSystem registriert");
+        Bukkit.getConsoleSender().sendMessage(MySQL.sqlPrefix + "§aLvckyWorldMoneySystem registriert");
     }
 
 
-    private static File getMySQL() {return new File("plugins/SchotterSystem/MySQL.yml");}
+    private static File getMySQL() {return new File("plugins/LW-MoneySystem/MySQL.yml");}
     private static FileConfiguration getConfiguration() { return YamlConfiguration.loadConfiguration(getMySQL()); }
 
     private static void loadConfig() {

@@ -1,6 +1,6 @@
-package net.sernoxcraft.schottersystem.mysql;
+package net.lvckyworld.moneysystem.mysql;
 
-import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
+import net.lvckyworld.moneysystem.systemmanager.SystemManager;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;
@@ -37,7 +37,6 @@ public class MySQL {
     /**
      * Schließt die Datenbank verbindung wenn eine Verbindung besteht
      *
-     * @throws SQLException
      * @author LvckyAPI
      * @since 10/05/2021
      */

@@ -1,8 +1,7 @@
-package net.sernoxcraft.schottersystem.listeners;
+package net.lvckyworld.moneysystem.listeners;
 
-import net.sernoxcraft.schottersystem.main.Main;
-import net.sernoxcraft.schottersystem.systemmanager.SystemManager;
-import net.sernoxcraft.schottersystem.utils.SchotterManager;
+import net.lvckyworld.moneysystem.LWMoneySystem;
+import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +16,10 @@ public class Join implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
-        if (!SchotterManager.isUserExist(p)){
-            SchotterManager.firstConnect(p, Main.startBalance);
+        if (!MySQLHandler.isUserExist(p)){
+            MySQLHandler.firstConnect(p, LWMoneySystem.startBalance);
         }
+        MySQLHandler.updateDatabase(p);
     }
 
 }

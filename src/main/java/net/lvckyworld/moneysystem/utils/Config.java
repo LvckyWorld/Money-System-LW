@@ -1,4 +1,4 @@
-package net.sernoxcraft.schottersystem.utils;
+package net.lvckyworld.moneysystem.utils;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Config {
 
 
-    public static File configFile = new File("plugins/SchotterSystem", "config.yml");
+    public static File configFile = new File("plugins/LW-MoneySystem", "config.yml");
     public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
 

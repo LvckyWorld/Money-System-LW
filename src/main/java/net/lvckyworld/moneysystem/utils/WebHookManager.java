@@ -1,18 +1,14 @@
-package net.sernoxcraft.schottersystem.utils;
+package net.lvckyworld.moneysystem.utils;
 
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.awt.*;
 import java.io.OutputStream;
 import java.net.URL;
-import java.sql.Time;
+import java.nio.charset.StandardCharsets;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
@@ -21,15 +17,14 @@ import java.util.Locale;
 public class WebHookManager {
 
 
-    public static void onSendDiscordMessage(String title, String content, String username, String WebHookURL) throws Exception {
-
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .toFormatter(Locale.GERMANY);
+    public static void sendDiscordWebhook(String title, String content, String username, String WebHookURL) throws Exception {
+        if (!LWMoneySystem.useWebHook) {
+            return;
+        }
         JSONObject embed = new JSONObject();
         embed.put("title", title);
         embed.put("description", content);
         embed.put("color", 16745963);
-        embed.put("avatar_url", "https://i.lvckyworld.net/sernoxcraft/SernoxCraftLogo.png");
         embed.put("timestamp", LocalDateTime.now(ZoneId.of("Africa/Abidjan")).toString());
 
         JSONArray embeds = new JSONArray();
@@ -51,7 +46,7 @@ public class WebHookManager {
         connection.setRequestMethod("POST");
 
         OutputStream stream = connection.getOutputStream();
-        stream.write(json.toString().getBytes());
+        stream.write(json.toString().getBytes(StandardCharsets.UTF_8));
         stream.flush();
         stream.close();
 
@@ -60,5 +55,4 @@ public class WebHookManager {
 
 
     }
-
 }
