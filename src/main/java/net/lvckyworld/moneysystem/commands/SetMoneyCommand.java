@@ -6,7 +6,6 @@ package net.lvckyworld.moneysystem.commands;
 
 
 import net.lvckyworld.moneysystem.LWMoneySystem;
-import net.lvckyworld.moneysystem.api.LvckyMoneyAPI;
 import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import net.lvckyworld.moneysystem.utils.WebHookManager;
 import org.bukkit.Bukkit;
@@ -68,7 +67,7 @@ public class SetMoneyCommand implements CommandExecutor {
                     p.sendMessage(LWMoneySystem.prefix + "§3Du hast das " + LWMoneySystem.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
                     t.sendMessage(LWMoneySystem.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + LWMoneySystem.currency + " auf §b" + amount + "§3 gestetzt");
                     try {
-                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                        WebHookManager.sendDiscordWebhook("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -96,7 +95,7 @@ public class SetMoneyCommand implements CommandExecutor {
                 MySQLHandler.updateOffline(args[0], amount2);
                 s.sendMessage(LWMoneySystem.prefix + "§3Du hast das " + LWMoneySystem.currency + " des Spielers §b" + args[0] + "§3 erfolgreich auf §b" + amount2 + "§3 gesetzt");
                 try {
-                    WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + "CONSOLE" + "**\n\nSETZT\n\n**" + args[0] + "**\n**" + amount2 + "** "+ LWMoneySystem.currency +"", "CONSOLE" + " ➛ " + amount2 + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                    WebHookManager.sendDiscordWebhook("SetMoney", "Der Spieler **" + "CONSOLE" + "**\n\nSETZT\n\n**" + args[0] + "**\n**" + amount2 + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount2 + " ➛ " + args[0], LWMoneySystem.webHookURL);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

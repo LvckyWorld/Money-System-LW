@@ -17,7 +17,7 @@ import java.time.*;
 public class WebHookManager {
 
 
-    public static void onSendDiscordMessage(String title, String content, String username, String WebHookURL) throws Exception {
+    public static void sendDiscordWebhook(String title, String content, String username, String WebHookURL) throws Exception {
         if (!LWMoneySystem.useWebHook) {
             return;
         }

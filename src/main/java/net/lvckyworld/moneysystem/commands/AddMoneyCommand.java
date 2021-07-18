@@ -80,7 +80,7 @@ public class AddMoneyCommand implements CommandExecutor {
 
 
                         try {
-                            WebHookManager.onSendDiscordMessage("Add-Money-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + LWMoneySystem.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", LWMoneySystem.webHookURL);
+                            WebHookManager.sendDiscordWebhook("Add-Money-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + LWMoneySystem.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                         }
 
@@ -113,7 +113,7 @@ public class AddMoneyCommand implements CommandExecutor {
                         t.sendMessage(LWMoneySystem.prefix + "§3Du hast §b" + amount + "§3 " + LWMoneySystem.currency + " bekommen.");
 
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                            WebHookManager.sendDiscordWebhook("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -128,7 +128,7 @@ public class AddMoneyCommand implements CommandExecutor {
                             p.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
 
                             try {
-                                WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                                WebHookManager.sendDiscordWebhook("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                             } catch (Exception exception) {
                                 exception.printStackTrace();
                             }
@@ -167,7 +167,7 @@ public class AddMoneyCommand implements CommandExecutor {
                     sender.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                     t.sendMessage(LWMoneySystem.prefix + "§3Du hast §b" + amount + "§3 " + LWMoneySystem.currency + " bekommen.");
                     try {
-                        WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                        WebHookManager.sendDiscordWebhook("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -179,7 +179,7 @@ public class AddMoneyCommand implements CommandExecutor {
                         MySQLHandler.updateOffline(args[0], newBallance);
                         sender.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                            WebHookManager.sendDiscordWebhook("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }

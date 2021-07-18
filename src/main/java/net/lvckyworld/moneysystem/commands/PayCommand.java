@@ -76,7 +76,7 @@ public class PayCommand implements CommandExecutor {
 
 
                         try {
-                            WebHookManager.onSendDiscordMessage("Überweisung-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** "+ LWMoneySystem.currency,p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS" , LWMoneySystem.webHookURL);
+                            WebHookManager.sendDiscordWebhook("Überweisung-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + LWMoneySystem.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                         }
 
@@ -141,7 +141,7 @@ public class PayCommand implements CommandExecutor {
                     target.sendMessage(LWMoneySystem.prefix + "§3Der Spieler " + p.getDisplayName() + "§r§3 hat dir §b" + sum + "§r§3 " + LWMoneySystem.currency + " überwiesen.");
 
                     try {
-                        WebHookManager.onSendDiscordMessage("Überweisung", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ")\n\n GIBT ZU \n\n**" + target.getName() + "** (" + target.getUniqueId().toString() + ") **\n\n" + sum + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + sum + " ➛ " + target.getName(), LWMoneySystem.webHookURL);
+                        WebHookManager.sendDiscordWebhook("Überweisung", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ")\n\n GIBT ZU \n\n**" + target.getName() + "** (" + target.getUniqueId().toString() + ") **\n\n" + sum + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + sum + " ➛ " + target.getName(), LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                     }
 
