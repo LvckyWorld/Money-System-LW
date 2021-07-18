@@ -59,9 +59,9 @@ public class SystemManager {
         Bukkit.getConsoleSender().sendMessage(debugPrefix + "setup()");
         FileConfiguration cfg = getConfiguration();
         MySQL.connect();
-        PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS SchotterSystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
+        PreparedStatement ps = MySQL.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS LvckyWorldMoneySystem (UUID VARCHAR(100), Spielername VARCHAR(100),Balance BIGINT)");
         ps.executeUpdate();
-        Bukkit.getConsoleSender().sendMessage(MySQL.sqlPrefix + "§aSchotterSystem registriert");
+        Bukkit.getConsoleSender().sendMessage(MySQL.sqlPrefix + "§aLvckyWorldMoneySystem registriert");
     }
 
 

@@ -6,6 +6,7 @@ package net.lvckyworld.moneysystem.commands;
 
 
 import net.lvckyworld.moneysystem.LWMoneySystem;
+import net.lvckyworld.moneysystem.api.LvckyMoneyAPI;
 import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import net.lvckyworld.moneysystem.utils.WebHookManager;
 import org.bukkit.Bukkit;
@@ -23,6 +24,12 @@ public class SetMoneyCommand implements CommandExecutor {
         // /setmoney Player <amount>
         if (sender instanceof Player) {
             Player p = (Player) sender;
+
+            LvckyMoneyAPI.addMoney(p, 500L);
+            LvckyMoneyAPI.removeMoney(p, 500L, "Du hast nicht genügend Geld!");
+            LvckyMoneyAPI.getBalance(p);
+            LvckyMoneyAPI.update(p, 100000000L);
+
             if (p.hasPermission("ss.sendmoney")) {
                 if (args.length == 2) {
                     Player t = Bukkit.getPlayer(args[0]);
