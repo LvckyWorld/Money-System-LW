@@ -26,6 +26,9 @@ public class LWMoneySystem extends JavaPlugin {
     public static LWMoneySystem getPlugin() {
         return plugin;
     }
+
+    // ToDo Test
+
     @Override
     public void onEnable() {
         plugin = this;
