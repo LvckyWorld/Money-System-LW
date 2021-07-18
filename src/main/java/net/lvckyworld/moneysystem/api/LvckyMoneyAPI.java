@@ -83,8 +83,6 @@ public class LvckyMoneyAPI {
 
         }
     }
-
-
     /**
      * Get the Balance of the Player
      * @param p The player from whom the account balance is to be checked
@@ -124,7 +122,6 @@ public class LvckyMoneyAPI {
         }
         return null;
     }
-
 
     /**
      * Update the Balance of a offlinePlayer

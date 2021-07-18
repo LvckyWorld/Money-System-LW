@@ -24,12 +24,6 @@ public class SetMoneyCommand implements CommandExecutor {
         // /setmoney Player <amount>
         if (sender instanceof Player) {
             Player p = (Player) sender;
-
-            LvckyMoneyAPI.addMoney(p, 500L);
-            LvckyMoneyAPI.removeMoney(p, 500L, "Du hast nicht genügend Geld!");
-            LvckyMoneyAPI.getBalance(p);
-            LvckyMoneyAPI.update(p, 100000000L);
-
             if (p.hasPermission("ss.sendmoney")) {
                 if (args.length == 2) {
                     Player t = Bukkit.getPlayer(args[0]);
@@ -74,13 +68,15 @@ public class SetMoneyCommand implements CommandExecutor {
                     p.sendMessage(LWMoneySystem.prefix + "§3Du hast das " + LWMoneySystem.currency + " des Spielers §b" + t.getName() + "§3 erfolgreich auf §b" + amount + "§3 gesetzt");
                     t.sendMessage(LWMoneySystem.prefix + "§3Der Spieler " + p.getDisplayName() + "§3 hat dein " + LWMoneySystem.currency + " auf §b" + amount + "§3 gestetzt");
                     try {
-                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** "+ LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
+                        WebHookManager.onSendDiscordMessage("SetMoney", "Der Spieler **" + p.getName() + "**( " + p.getUniqueId().toString() + ")\n\nSETZT\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
                 } else {
                     p.sendMessage(LWMoneySystem.prefix + "§cFalsche Usage. Benutze bitte§7: §b/setmoney <user> <summe>");
                 }
+            } else {
+                p.sendMessage(LWMoneySystem.prefix + "§cDu hast keine rechte für §e" + label);
             }
         } else {
             ConsoleCommandSender s = (ConsoleCommandSender) sender;

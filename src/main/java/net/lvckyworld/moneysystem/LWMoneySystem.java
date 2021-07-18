@@ -18,7 +18,7 @@ public class LWMoneySystem extends JavaPlugin {
     public static String webHookURL = "";
     public static String currency = "";
 
-    public static Long startBalance = Long.valueOf(0);
+    public static Long startBalance = 0L;
 
     public static LWMoneySystem plugin;
     public static LWMoneySystem getPlugin() {
@@ -36,7 +36,7 @@ public class LWMoneySystem extends JavaPlugin {
         prefix = Config.config.getString("Prefix").replaceAll("&", "§");
         webHookURL = Config.config.getString("DiscordWebHookURL");
         currency = Config.config.getString("Currency");
-        startBalance = Long.valueOf(Config.config.getLong("StartBalance"));
+        startBalance = Config.config.getLong("StartBalance");
 
         getServer().getPluginManager().registerEvents(new Join(), this);
         getCommand("pay").setExecutor(new PayCommand());

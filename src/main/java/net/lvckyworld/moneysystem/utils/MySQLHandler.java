@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class MySQLHandler {
 
@@ -117,6 +118,33 @@ public class MySQLHandler {
             }
         } else {
             System.err.println(MySQL.sqlPrefix + "Failed, Player not exist");
+        }
+    }
+
+    private static String getPlayerName(UUID playerName) {
+        try {
+            PreparedStatement ps = MySQL.getConnection().prepareStatement("SELECT Spielername FROM LvckyWorldMoneySystem WHERE UUID = ?");
+            ps.setString(1, playerName.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return "Spielername";
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void updateDatabase(Player p) {
+        if (!getPlayerName(p.getUniqueId()).equalsIgnoreCase(p.getName())) {
+            try {
+                PreparedStatement ps = MySQL.getConnection().prepareStatement("UPDATE LvckyWorldMoneySystem SET Spielername = ? WHERE UUID = ?");
+                ps.setString(1, p.getName());
+                ps.setString(2, p.getUniqueId().toString());
+                ps.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 

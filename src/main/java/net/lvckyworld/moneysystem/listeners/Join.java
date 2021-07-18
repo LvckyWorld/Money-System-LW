@@ -19,6 +19,7 @@ public class Join implements Listener {
         if (!MySQLHandler.isUserExist(p)){
             MySQLHandler.firstConnect(p, LWMoneySystem.startBalance);
         }
+        MySQLHandler.updateDatabase(p);
     }
 
 }
