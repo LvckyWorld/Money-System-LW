@@ -5,7 +5,7 @@ package net.lvckyworld.moneysystem.api;
  */
 
 
-import net.lvckyworld.moneysystem.main.Main;
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import net.lvckyworld.moneysystem.mysql.MySQL;
 import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import org.bukkit.Bukkit;
@@ -178,7 +178,7 @@ public class LvckyMoneyAPI {
      * @return The Currency
      */
     public static String getCurrency() {
-        return Main.currency;
+        return LWMoneySystem.currency;
     }
 
 

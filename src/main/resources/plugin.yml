@@ -1,5 +1,5 @@
 name: SchotterSystem
-main: net.lvckyworld.moneysystem.main.Main
+main: net.lvckyworld.moneysystem.LWMoneySystem
 version: 1.0
 author: Iven S. Lukas Oe.
 commands:

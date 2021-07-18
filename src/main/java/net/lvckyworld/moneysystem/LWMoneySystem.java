@@ -1,4 +1,4 @@
-package net.lvckyworld.moneysystem.main;
+package net.lvckyworld.moneysystem;
 
 import net.lvckyworld.moneysystem.commands.AddMoneyCommand;
 import net.lvckyworld.moneysystem.commands.BalanceCommand;
@@ -15,7 +15,7 @@ import java.io.IOException;
  * ©2016-2021 LvckyWorld - By StossenHDYT all Rights reserved
  * Licensed to Iven Schlenther & Lukas Oetken
  **/
-public class Main extends JavaPlugin {
+public class LWMoneySystem extends JavaPlugin {
 
     public static String prefix = "";
     public static String webHookURL = "";
@@ -23,8 +23,8 @@ public class Main extends JavaPlugin {
 
     public static Long startBalance = Long.valueOf(0);
 
-    public static Main plugin;
-    public static Main getPlugin() {
+    public static LWMoneySystem plugin;
+    public static LWMoneySystem getPlugin() {
         return plugin;
     }
     @Override

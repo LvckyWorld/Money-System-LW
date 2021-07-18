@@ -1,7 +1,7 @@
 package net.lvckyworld.moneysystem.systemmanager;
 
 import net.lvckyworld.moneysystem.mysql.MySQL;
-import net.lvckyworld.moneysystem.main.Main;
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,7 +26,7 @@ public class SystemManager {
     private static String PASSWORD;
 
 
-    FileConfiguration cfg = Main.getPlugin().getConfig();
+    FileConfiguration cfg = LWMoneySystem.getPlugin().getConfig();
     String pref = cfg.getString("Config.prefix").replaceAll("&","§") + "§r ";
 
     private static String prefix;

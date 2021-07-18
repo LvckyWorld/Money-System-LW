@@ -8,7 +8,7 @@ package net.lvckyworld.moneysystem.commands;
 import net.lvckyworld.moneysystem.api.LvckyMoneyAPI;
 import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import net.lvckyworld.moneysystem.utils.WebHookManager;
-import net.lvckyworld.moneysystem.main.Main;
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -32,18 +32,18 @@ public class AddMoneyCommand implements CommandExecutor {
                         Long sum1;
                         try {
                             if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
-                                p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                                p.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                                 return false;
                             }
                             final Long sum2 = Long.valueOf(args[1]);
                             sum1 = sum2;
                         } catch (Exception e) {
-                            p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                            p.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
                         }
 
                         if (sum1 == 0) {
-                            p.sendMessage(Main.prefix + "§cDu musst mindestens 1 " + Main.currency + " überweisen!");
+                            p.sendMessage(LWMoneySystem.prefix + "§cDu musst mindestens 1 " + LWMoneySystem.currency + " überweisen!");
                             return false;
                         }
 
@@ -70,17 +70,17 @@ public class AddMoneyCommand implements CommandExecutor {
                                 Long finalSum = balancePlayerTarget + sum1;
 
                                 MySQLHandler.update(players.getPlayer(), finalSum);
-                                players.sendMessage(Main.prefix + "§3Du hast§b " + sum1 + "§3 " + Main.currency + "§3 bekommen!");
+                                players.sendMessage(LWMoneySystem.prefix + "§3Du hast§b " + sum1 + "§3 " + LWMoneySystem.currency + "§3 bekommen!");
                             }
                         });
 
                         //Set New MySQL Values
 
-                        p.sendMessage(Main.prefix + "§3Du hast jedem Spieler §b" + sum1 + "§b " + Main.currency + "§3 gegeben.");
+                        p.sendMessage(LWMoneySystem.prefix + "§3Du hast jedem Spieler §b" + sum1 + "§b " + LWMoneySystem.currency + "§3 gegeben.");
 
 
                         try {
-                            WebHookManager.onSendDiscordMessage("Add-Money-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + Main.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", Main.webHookURL);
+                            WebHookManager.onSendDiscordMessage("Add-Money-ALL-ONLINE-PLAYERS", "**" + p.getName() + "**" + " (" + p.getUniqueId().toString() + ")\n\nGIBT ZU\n\n ALL-PLAYERS **" + sum1 + "** " + LWMoneySystem.currency, p.getName() + " ➛ " + sum1 + " ➛ ALLPLAYERS", LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                         }
 
@@ -92,12 +92,12 @@ public class AddMoneyCommand implements CommandExecutor {
                     Long amount = 0l;
                     try {
                         if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
-                            p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                            p.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                             return false;
                         }
                         amount = Long.valueOf(args[1]);
                     } catch (Exception e) {
-                        p.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                        p.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                         return false;
                     }
 
@@ -109,11 +109,11 @@ public class AddMoneyCommand implements CommandExecutor {
                         Long newBallance = calculate;
 
                         MySQLHandler.update(t, newBallance);
-                        p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 " + Main.currency + " hinzugefügt");
-                        t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
+                        p.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + t.getName() + "§a " + amount + "§3 " + LWMoneySystem.currency + " hinzugefügt");
+                        t.sendMessage(LWMoneySystem.prefix + "§3Du hast §b" + amount + "§3 " + LWMoneySystem.currency + " bekommen.");
 
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                            WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -125,21 +125,21 @@ public class AddMoneyCommand implements CommandExecutor {
                             Long calculate = ballanceNow + amount;
                             Long newBallance = calculate;
                             MySQLHandler.updateOffline(args[0], newBallance);
-                            p.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+                            p.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
 
                             try {
-                                WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                                WebHookManager.onSendDiscordMessage("AddMoney", "**" + p.getName() + "** (" + p.getUniqueId().toString() + ") " + "\n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", p.getName() + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                             } catch (Exception exception) {
                                 exception.printStackTrace();
                             }
                         }
                     }
                 } else {
-                    p.sendMessage(Main.prefix + "§3Mache §e/addmoney <Spieler> <Anzahl>");
+                    p.sendMessage(LWMoneySystem.prefix + "§3Mache §e/addmoney <Spieler> <Anzahl>");
                 }
 
             } else {
-                p.sendMessage(Main.prefix + "§cDu hast keine rechte für §e" + label);
+                p.sendMessage(LWMoneySystem.prefix + "§cDu hast keine rechte für §e" + label);
             }
         } else {
 
@@ -147,12 +147,12 @@ public class AddMoneyCommand implements CommandExecutor {
                 Long amount = 0l;
                 try {
                     if (args[1].contains("-") || args[1].contains("%") || args[1].contains("*") || args[1].contains("/")) {
-                        sender.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                        sender.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                         return false;
                     }
                     amount = Long.valueOf(args[1]);
                 } catch (Exception e) {
-                    sender.sendMessage(Main.prefix + "§cBitte gebe eine gültige Summe an!");
+                    sender.sendMessage(LWMoneySystem.prefix + "§cBitte gebe eine gültige Summe an!");
                     return false;
                 }
 
@@ -164,10 +164,10 @@ public class AddMoneyCommand implements CommandExecutor {
                     Long newBallance = calculate;
 
                     MySQLHandler.update(t, newBallance);
-                    sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
-                    t.sendMessage(Main.prefix + "§3Du hast §b" + amount + "§3 " + Main.currency + " bekommen.");
+                    sender.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+                    t.sendMessage(LWMoneySystem.prefix + "§3Du hast §b" + amount + "§3 " + LWMoneySystem.currency + " bekommen.");
                     try {
-                        WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                        WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
@@ -177,9 +177,9 @@ public class AddMoneyCommand implements CommandExecutor {
                         Long calculate = ballanceNow + amount;
                         Long newBallance = calculate;
                         MySQLHandler.updateOffline(args[0], newBallance);
-                        sender.sendMessage(Main.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
+                        sender.sendMessage(LWMoneySystem.prefix + "§3Du hast dem Spieler §b" + args[0] + "§a " + amount + "§3 hinzugefügt");
                         try {
-                            WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + Main.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], Main.webHookURL);
+                            WebHookManager.onSendDiscordMessage("AddMoney", "**CONSOLE** \n\nFÜGT ZU\n\n**" + args[0] + "**\n**" + amount + "** " + LWMoneySystem.currency + "", "CONSOLE" + " ➛ " + amount + " ➛ " + args[0], LWMoneySystem.webHookURL);
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -187,7 +187,7 @@ public class AddMoneyCommand implements CommandExecutor {
                     }
                 }
             } else {
-                sender.sendMessage(Main.prefix + "§3Mache §e/addmoney <Spieler> <Anzahl>");
+                sender.sendMessage(LWMoneySystem.prefix + "§3Mache §e/addmoney <Spieler> <Anzahl>");
             }
 
         }

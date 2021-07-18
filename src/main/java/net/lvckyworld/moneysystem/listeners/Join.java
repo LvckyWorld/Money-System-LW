@@ -1,6 +1,6 @@
 package net.lvckyworld.moneysystem.listeners;
 
-import net.lvckyworld.moneysystem.main.Main;
+import net.lvckyworld.moneysystem.LWMoneySystem;
 import net.lvckyworld.moneysystem.utils.MySQLHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +17,7 @@ public class Join implements Listener {
     public void onJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
         if (!MySQLHandler.isUserExist(p)){
-            MySQLHandler.firstConnect(p, Main.startBalance);
+            MySQLHandler.firstConnect(p, LWMoneySystem.startBalance);
         }
     }
 
