@@ -1,10 +1,10 @@
 # Money-System-LW
 
 Das Money-System-LW ist ein professionelles und voll modulares Money-System.
-Die Spieler habe durch das Plugin die Möglichkeit, mit einer auswählbaren Ingamewährung Ingamekäufe abzuschließen. 
-Dabei wird auf Grund der Performance auf eine Datenbankverbindung gesetzt welche in der "MySQL.yml" konfiguriert werden kann gesetzt.
-Das SchotterSystem verfügt desweiteren über ein LogSystem, welche alle Transaktionen per Webhook auf einen Discord-Server protokolliert.
-Prefix, Währung  und Discord-Webhook-URL sind in der "config.yml" einstellbar. Weitere Infos unten
+Die Spieler habe durch das Plugin die Möglichkeit, mit einer auswählbaren Ingamewährung, Ingamekäufe abzuschließen. 
+Dabei wird aufgrund der Performance auf eine Datenbankverbindung gesetzt welche in der "MySQL.yml" konfiguriert werden kann gesetzt.
+Das SchotterSystem verfügt des Weiteren über ein LogSystem, welche alle Transaktionen per Webhook auf einen Discord-Server protokolliert.
+Prefix, Währung und Discord-Webhook-URL sind in der "config.yml" einstellbar. Weitere Informationen unten
 
 ## Spieler-Befehle
 
@@ -30,22 +30,20 @@ Command                                   | Permission              | Funktion
 ## Konfigurationshilfe
 
 ### config.yml
-```
-// Startbalance ist die Summe an Geld, welche jeder User erhält, sobalt er sich zum ersten mal auf den CityBuild verbindet.
-// Currency stellt die frei wählbare Währung da
-// DiscordWebHookURL ist die URL die Ihr eingeben müsst um den Log zum laufen zu bekommen PFLICHT!
+```yaml
+# Startbalance ist die Summe an Geld, welche jeder User erhält, sobald er sich zum ersten Mal auf den Server verbindet.
+# Currency stellt die frei wählbare Währung dar
+# DiscordWebHookURL ist die URL, die Ihr eingeben, müsst um das Log zum Laufen zu bekommen!
 
 Prefix: '§cSchotterSystem §8➛§r '
 StartBalance: 1000
-Currency: Schotter
+Currency: Money
 DiscordWebHookURL: https://discord.com/api/webhooks/64894984984985/12ur89013j89f809321809hf89h2894h8fh3w8
-
 ```
 
 ### MySQL.yml
-
-```
-// use MUSS auf true gestzt werden
+```yaml
+# use MUSS auf true gesetzt werden
 
 mysql:
   use: true
@@ -53,8 +51,7 @@ mysql:
   port: 3306
   user: <user>
   datenbase: <database>
-  passwort: ******
-  
+  passwort: ------
 ```
 
 Informationsvideo zu den ConfigFiles: [Klicke hier](https://youtu.be/TqrZ_ag3JTE)

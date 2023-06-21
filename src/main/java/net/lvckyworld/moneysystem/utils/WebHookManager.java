@@ -1,6 +1,7 @@
 package net.lvckyworld.moneysystem.utils;
 
 import net.lvckyworld.moneysystem.LWMoneySystem;
+import org.bukkit.Bukkit;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -16,11 +17,9 @@ import java.time.*;
  **/
 public class WebHookManager {
 
-
     public static void sendDiscordWebhook(String title, String content, String username, String WebHookURL) throws Exception {
-        if (!LWMoneySystem.useWebHook) {
-            return;
-        }
+        if (!LWMoneySystem.useWebHook) return;
+
         JSONObject embed = new JSONObject();
         embed.put("title", title);
         embed.put("description", content);
@@ -30,14 +29,14 @@ public class WebHookManager {
         JSONArray embeds = new JSONArray();
         embeds.add(embed);
 
-
         JSONObject json = new JSONObject();
         json.put("username", username);
         json.put("embeds", embeds);
 
-
-        //String json = "{\"content\": \"" + content + "\", \"username\": \"" + username + "\"}";
-
+        if (WebHookURL == null) {
+            Bukkit.getConsoleSender().sendMessage(LWMoneySystem.prefix + "§cWARNUNG: §eEs wurde keine WebHookURL in der config angegeben.");
+            return;
+        }
         URL url = new URL(WebHookURL);
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.addRequestProperty("Content-Type", "application/json");
@@ -52,7 +51,5 @@ public class WebHookManager {
 
         connection.getInputStream().close();
         connection.disconnect();
-
-
     }
 }

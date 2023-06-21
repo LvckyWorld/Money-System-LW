@@ -1,6 +1,6 @@
 name: LW-MoneySystem
 main: net.lvckyworld.moneysystem.LWMoneySystem
-version: 1.0
+version: 1.2
 author: Iven S. Lukas Oe.
 commands:
   pay:
